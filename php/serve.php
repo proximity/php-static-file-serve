@@ -44,9 +44,11 @@ if (!file_exists($file))
 	die("404 Not Found");
 }
 
-// Get mime type so we can serve the file correctly
+// Get/set mime type so we can serve the file correctly
 $finfo = new finfo(FILEINFO_MIME, $config['magic_folder']);
 $mime = $finfo->file();
 finfo_close($finfo);
+header('Content-type: ' . $mime);
 
-
+// Output the file to the browser
+readfile($file);
