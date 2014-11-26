@@ -1,15 +1,7 @@
 <?php
 require_once('config.php');
 
-if (!isset($_GET['file']))
-{
-	// This shouldn't happen unless your webserver is configured
-	// incorrectly.
-	header("HTTP/1.0 418 I'm a teapot");
-	die("I'm a teapot");
-}
-
-$file = $_GET['file'];
+$file = $_SERVER['REQUEST_URI'];
 $folder = $config['folder_location'];
 
 if (!is_dir($folder))
