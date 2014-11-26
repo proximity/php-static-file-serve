@@ -10,6 +10,7 @@ should have read permissions.
 
 Then, set up this app in a folder that is accessible by web. Ideally
 the php folder should be configured as the 'public_html' directory.
+Copy config.sample.php to config.php and adjust settings as needed.
 
 ### Apache < 2.4
 If you use AllowOverride, everything should work automatically. If you
