@@ -10,7 +10,7 @@ if (!is_dir($folder))
 }
 
 // Remove trailing slash(es) from folder
-while (substr($folder, 0, -1) === '/')
+while (substr($folder, -1) === '/')
 {
 	$folder = substr($folder, 0, strlen($folder) - 1);
 }
@@ -35,7 +35,7 @@ if (is_dir($fullPath))
 {
 	// Requested path is a folder. If there is no trailing slash, add
 	// one so that assets with relative URLs are loaded correctly.
-	if (substr($_SERVER['REQUEST_URI'], 0, -1) !== '/')
+	if (substr($_SERVER['REQUEST_URI'], -1) !== '/')
 	{
 		$url = (empty($_SERVER['https'])) ? 'http://' : 'https://';
 		$url .= $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . '/';
@@ -44,7 +44,7 @@ if (is_dir($fullPath))
 	}
 
 	// Remove all trailing slashes.
-	while (substr($fullPath, 0, -1) === '/')
+	while (substr($fullPath, -1) === '/')
 	{
 		$fullPath = substr($fullPath, 0, strlen($fullPath) - 1);
 	}
