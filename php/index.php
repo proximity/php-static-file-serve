@@ -33,7 +33,17 @@ $fullPath = $folder . $file;
 $searchFiles = array();
 if (is_dir($fullPath))
 {
-	// Requested path is a folder. Remove trailing slashes.
+	// Requested path is a folder. If there is no trailing slash, add
+	// one so that assets with relative URLs are loaded correctly.
+	if (substr($fullPath, 0, -1) !== '/')
+	{
+		$url = (empty($_SERVER['https'])) ? 'http://' : 'https://';
+		$url .= $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . '/';
+		header('Location: ' . $url);
+		die();
+	}
+
+	// Remove all trailing slashes.
 	while (substr($fullPath, 0, -1) === '/')
 	{
 		$fullPath = substr($fullPath, 0, strlen($fullPath) - 1);
