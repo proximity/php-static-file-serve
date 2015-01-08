@@ -83,7 +83,7 @@ if (!$file)
 
 // Get/set mime type so we can serve the file correctly
 $finfo = new finfo(FILEINFO_MIME, $config['magic_file']);
-$mime = $finfo->file();
+$mime = $finfo->file($file);
 finfo_close($finfo);
 header('Content-type: ' . $mime);
 
