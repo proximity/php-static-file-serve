@@ -81,10 +81,18 @@ if (!$file)
 	die("404 Not Found");
 }
 
-// Get/set mime type so we can serve the file correctly
-$finfo = new finfo(FILEINFO_MIME, $config['magic_file']);
-$mime = $finfo->file($file);
-finfo_close($finfo);
+$fileExtension = pathinfo($file, PATHINFO_EXTENSION);
+if ($fileExtension && isset($config['custom_mime_types'][$fileExtension]))
+{
+	$mime = $config['custom_mime_types'][$fileExtension];
+}
+else
+{
+	// Get/set mime type so we can serve the file correctly
+	$finfo = new finfo(FILEINFO_MIME, $config['magic_file']);
+	$mime = $finfo->file($file);
+	finfo_close($finfo);
+}
 header('Content-type: ' . $mime);
 
 // Output the file to the browser

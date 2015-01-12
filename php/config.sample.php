@@ -5,4 +5,8 @@ $config = array(
 	'default_files'		=> array(
 		'index.html'
 	),
+	'custom_mime_types' => array(
+		'css'			=> 'text/css',
+		'js'			=> 'text/javascript',
+	),
 );
